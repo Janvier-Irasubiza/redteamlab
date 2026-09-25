@@ -1,0 +1,52 @@
+Attacker (Host Machine)
+        │
+        ▼
+┌─── DMZ Network (172.20.1.0/24) ───────────────────────┐
+│                                                        │
+│  web-01       (172.20.1.10)                            │
+│                                             			   │
+│                                                        │
+│  mail-01      (172.20.1.11)                            │
+│                                                        │
+│                                                        │
+│  vpn-gw-01   (172.20.1.12)                             │
+│  SSH / Pivot Point ──────────────────────────────┐    │
+│                                                  │    │
+└──────────────────────────────────────────────────┼────┘
+                                                   │
+                                                   ▼
+┌─── Internal Network (10.10.0.0/24) ─────────────┴─────┐
+│                                                        │
+│  app-01       (10.10.0.13)                             │
+│                                            			  │
+│                                                        │
+│  db-01        (10.10.0.14)                             │
+│                                               		  │
+│                                                        │
+│  file-01      (10.10.0.15)                             │
+│                                                   	  │
+│                                                        │
+│  admin-01     (10.10.0.16)                             │
+│                                             			  │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+
+
+| Service     |   URL / Access                                 |   Network   |
+| ----------- | ---------------------------------------------- | ----------- |
+| Web Portal  | [http://localhost:8080](http://localhost:8080) | DMZ         |
+| Webmail     | [http://localhost:8025](http://localhost:8025) | DMZ         |
+| SSH Gateway | `ssh -p 2222 sysadmin@localhost`               | DMZ         |
+| API Server  | `app-01:3000` *(via pivot)*                    | Internal    |
+| Database    | `db-01:3306` *(via pivot)*                     | Internal    |
+| File Share  | `file-01:445` *(via pivot)*                    | Internal    |
+| Admin Panel | `admin-01:8080` *(via pivot)*                  | Internal    |
+
+
+
+
+
+
+
+
+
